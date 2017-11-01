@@ -5,8 +5,18 @@
 //#include "FusionEKF.h"
 //#include "tools.h"
 
-using namespace std;
+#include <vector>
+#include "Eigen/Dense"
 
+#include <sstream>
+#include <string>
+#include <fstream>
+std::ifstream infile("data/obj_pose-laser-radar-synthetic-input.txt");
+
+
+using namespace std;
+using Eigen::VectorXd;
+using Eigen::MatrixXd;
 
 int main()
 {
