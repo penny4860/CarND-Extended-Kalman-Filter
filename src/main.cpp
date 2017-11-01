@@ -11,7 +11,7 @@
 #include <sstream>
 #include <string>
 #include <fstream>
-std::ifstream infile("data/obj_pose-laser-radar-synthetic-input.txt");
+std::ifstream infile("data/data.txt");
 
 
 using namespace std;
