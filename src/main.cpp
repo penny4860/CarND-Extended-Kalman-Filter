@@ -7,7 +7,7 @@ using namespace std;
 
 int main () {
   string line;
-  ifstream myfile ("c:\\data.txt");
+  ifstream myfile ("src/data/data.txt");
 
   if (myfile.is_open())
   {
