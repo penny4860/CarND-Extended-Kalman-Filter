@@ -1,25 +1,54 @@
-//#include <uWS/uWS.h>
+// reading a text file
 #include <iostream>
-//#include "json.hpp"
-#include <math.h>
-//#include "FusionEKF.h"
-//#include "tools.h"
-
-#include <vector>
-#include "Eigen/Dense"
-
-#include <sstream>
-#include <string>
 #include <fstream>
-std::ifstream infile("data/data.txt");
-
-
+#include <string>
+#include <sstream>
 using namespace std;
-using Eigen::VectorXd;
-using Eigen::MatrixXd;
 
-int main()
-{
-	std::cout << "Start !!";
+int main () {
+  string line;
+  ifstream myfile ("c:\\data.txt");
 
+  if (myfile.is_open())
+  {
+    while ( getline (myfile,line) )
+    {
+		std::stringstream linestream(line);
+		std::string         data;
+
+		string sensor;
+		std::getline(linestream, data, '\t');  // read up-to the first tab (discard tab).
+		sensor = line[0];
+
+		// Read the integers using the operator >>
+
+    	if (sensor.compare("R") == 0)
+    	{
+    		float rho;
+    		float theta;
+    		float v_rho;
+
+    		linestream >> rho >> theta >> v_rho;
+        	cout << "sensor=" << sensor << " rho=" <<  rho << " theta=" << theta << " vel=" << v_rho << '\n';
+    	}
+    	else
+    	{
+    		float px;
+    		float py;
+    		float vx;
+    		float vy;
+
+    		linestream >> px >> py >> vx >> vy;
+        	cout << "sensor=" << sensor << " px=" <<  px << " py=" << py << " vx=" << vx << " vy=" << vy << '\n';
+    	}
+
+    }
+    myfile.close();
+  }
+
+  else cout << "Unable to open file";
+
+  return 0;
 }
+
+
