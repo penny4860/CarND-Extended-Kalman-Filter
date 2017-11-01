@@ -5,6 +5,10 @@
 #include <sstream>
 using namespace std;
 
+
+
+
+
 int main () {
   string line;
   ifstream myfile ("src/data/data.txt");
@@ -35,11 +39,9 @@ int main () {
     	{
     		float px;
     		float py;
-    		float vx;
-    		float vy;
 
-    		linestream >> px >> py >> vx >> vy;
-        	cout << "sensor=" << sensor << " px=" <<  px << " py=" << py << " vx=" << vx << " vy=" << vy << '\n';
+    		linestream >> px >> py;
+        	cout << "sensor=" << sensor << " px=" <<  px << " py=" << py << '\n';
     	}
 
     }
