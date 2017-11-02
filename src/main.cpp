@@ -10,6 +10,7 @@
 
 using namespace std;
 
+//RMSE:    0.0972256, 0.0853761, 0.450855, 0.439588
 int main () {
   string line;
   ifstream myfile ("data/obj_pose-laser-radar-synthetic-input.txt");
