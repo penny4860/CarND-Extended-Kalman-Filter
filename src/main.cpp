@@ -10,7 +10,6 @@
 
 using namespace std;
 
-//RMSE:    0.0972256, 0.0853761, 0.450855, 0.439588
 int main () {
   string line;
   ifstream myfile ("data/obj_pose-laser-radar-synthetic-input.txt");
@@ -22,6 +21,8 @@ int main () {
   Tools tools;
   vector<VectorXd> estimations;
   vector<VectorXd> ground_truth;
+
+  int count = 0;
 
   if (myfile.is_open())
   {
@@ -46,10 +47,10 @@ int main () {
     		float ro_dot;
 
     		linestream >> ro >> theta >> ro_dot >> timestamp >> x_gt >> y_gt >> vx_gt >> vy_gt;
-        	cout << "sensor=" << sensor << " rho=" <<  ro <<
-        			" theta=" << theta << " vel=" << ro_dot <<
-					" time=" << timestamp <<
-					" x_gt=" << x_gt << " y_gt=" << y_gt << " vx_gt=" << vx_gt << " vy_gt=" << vy_gt << "\n";
+//        	cout << "sensor=" << sensor << " rho=" <<  ro <<
+//        			" theta=" << theta << " vel=" << ro_dot <<
+//					" time=" << timestamp <<
+//					" x_gt=" << x_gt << " y_gt=" << y_gt << " vx_gt=" << vx_gt << " vy_gt=" << vy_gt << "\n";
 
             meas_package.sensor_type_ = MeasurementPackage::RADAR;
             meas_package.raw_measurements_ = VectorXd(3);
@@ -62,8 +63,8 @@ int main () {
     		float py;
 
     		linestream >> px >> py >> timestamp >> x_gt >> y_gt >> vx_gt >> vy_gt;
-        	cout << "sensor=" << sensor << " px=" <<  px << " py=" << py << " time=" << timestamp <<
-					" x_gt=" << x_gt << " y_gt=" << y_gt << " vx_gt=" << vx_gt << " vy_gt=" << vy_gt << "\n";
+//        	cout << "sensor=" << sensor << " px=" <<  px << " py=" << py << " time=" << timestamp <<
+//					" x_gt=" << x_gt << " y_gt=" << y_gt << " vx_gt=" << vx_gt << " vy_gt=" << vy_gt << "\n";
 
             meas_package.sensor_type_ = MeasurementPackage::LASER;
             meas_package.raw_measurements_ = VectorXd(2);
@@ -99,7 +100,10 @@ int main () {
 
         VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
 
-        cout << "	RMSE:    "<< RMSE(0) << ", " << RMSE(1) << ", " << RMSE(2) << ", " << RMSE(3) << "\n";
+        cout << count << "	RMSE:    "<< RMSE(0) << ", " << RMSE(1) << ", " << RMSE(2) << ", " << RMSE(3) << "\n";
+//        498	RMSE:    0.0973178, 0.0854597, 0.451267, 0.439935
+//        499	RMSE:    0.0972256, 0.0853761, 0.450855, 0.439588
+        count++;
     }
     myfile.close();
   }
