@@ -7,7 +7,7 @@ using namespace std;
 
 int main () {
   string line;
-  ifstream myfile ("src/data/data.txt");
+  ifstream myfile ("data/obj_pose-laser-radar-synthetic-input.txt");
 
   if (myfile.is_open())
   {
