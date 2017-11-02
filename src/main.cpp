@@ -47,8 +47,8 @@ int main () {
     		linestream >> ro >> theta >> ro_dot >> timestamp >> x_gt >> y_gt >> vx_gt >> vy_gt;
         	cout << "sensor=" << sensor << " rho=" <<  ro <<
         			" theta=" << theta << " vel=" << ro_dot <<
-					"time" << timestamp <<
-					"x_gt" << x_gt << "y_gt" << y_gt << "vx_gt" << vx_gt << "vy_gt" << vy_gt << "\n";
+					" time=" << timestamp <<
+					" x_gt=" << x_gt << " y_gt=" << y_gt << " vx_gt=" << vx_gt << " vy_gt=" << vy_gt << "\n";
 
             meas_package.sensor_type_ = MeasurementPackage::RADAR;
             meas_package.raw_measurements_ = VectorXd(3);
@@ -61,8 +61,8 @@ int main () {
     		float py;
 
     		linestream >> px >> py >> timestamp >> x_gt >> y_gt >> vx_gt >> vy_gt;
-        	cout << "sensor=" << sensor << " px=" <<  px << " py=" << py << "time" << timestamp <<
-					"x_gt" << x_gt << "y_gt" << y_gt << "vx_gt" << vx_gt << "vy_gt" << vy_gt << "\n";
+        	cout << "sensor=" << sensor << " px=" <<  px << " py=" << py << " time=" << timestamp <<
+					" x_gt=" << x_gt << " y_gt=" << y_gt << " vx_gt=" << vx_gt << " vy_gt=" << vy_gt << "\n";
 
             meas_package.sensor_type_ = MeasurementPackage::LASER;
             meas_package.raw_measurements_ = VectorXd(2);
