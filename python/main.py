@@ -1,5 +1,7 @@
 
 from pkg.measurement_package import MeasurementPackage
+from pkg.FusionEKF import FusionEKF
+from pkg.tools import Tools
 
 import numpy as np
 
@@ -11,7 +13,8 @@ estimations = []
 ground_truth = []
 
 # Create a Kalman Filter instance
-# fusionEKF = FusionEKF()
+fusionEKF = FusionEKF()
+tools_ = Tools()
 
 for line in lines:
     line = str(line).split()
@@ -42,26 +45,18 @@ for line in lines:
     ground_truth.append(gt_values)
     
     
-#     # Call ProcessMeasurment(meas_package) for Kalman filter
-#     fusionEKF.ProcessMeasurement(meas_package);
+    # Call ProcessMeasurment(meas_package) for Kalman filter
+    fusionEKF.ProcessMeasurement(meas_package);
 # 
-#     # Push the current estimated x,y positon from the Kalman filter's state vector
-#     VectorXd estimate(4);
-# 
-#     double p_x = fusionEKF.ekf_.x_(0);
-#     double p_y = fusionEKF.ekf_.x_(1);
-#     double v1  = fusionEKF.ekf_.x_(2);
-#     double v2 = fusionEKF.ekf_.x_(3);
-# 
-#     estimate(0) = p_x;
-#     estimate(1) = p_y;
-#     estimate(2) = v1;
-#     estimate(3) = v2;
-# 
-#     estimations.push_back(estimate);
-# 
-#     VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
-# 
+    # Push the current estimated x,y positon from the Kalman filter's state vector
+    print(fusionEKF.ekf_.x_)
+    px, py, vx, vy = fusionEKF.ekf_.x_
+    estimate = np.array([px, py, vx, vy]).reshape(-1,1)
+    estimations.append(estimate)
+    
+    RMSE = tools.CalculateRMSE(estimations, ground_truth)
+    print("RMSE = {}".format(RMSE))
+    
 #     cout << count << "    RMSE:    "<< RMSE(0) << ", " << RMSE(1) << ", " << RMSE(2) << ", " << RMSE(3) << "\n";
 #     # //        498    RMSE:    0.0973178, 0.0854597, 0.451267, 0.439935
 #     # //        499    RMSE:    0.0972256, 0.0853761, 0.450855, 0.439588
