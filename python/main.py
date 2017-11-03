@@ -33,7 +33,7 @@ for line in lines:
         y_gt = float(y_gt)
         vx_gt = float(vx_gt)
         vy_gt = float(vy_gt)
-        print(ro, theta, ro_dot)
+#         print(ro, theta, ro_dot)
         
         meas_package.sensor_type_ = "R";
         meas_package.raw_measurements_ = np.array([ro, theta, ro_dot]).reshape(-1,1)
@@ -50,14 +50,12 @@ for line in lines:
         y_gt = float(y_gt)
         vx_gt = float(vx_gt)
         vy_gt = float(vy_gt)
-        print(px, py)
+#         print(px, py)
         
         meas_package.sensor_type_ = "L";
         meas_package.raw_measurements_ = np.array([px, py]).reshape(-1,1)
         meas_package.timestamp_ = timestamp;
     
-    
-    print("raw array", meas_package.raw_measurements_)
     
     gt_values = np.array([x_gt, y_gt, vx_gt, vy_gt])
     ground_truth.append(gt_values)
