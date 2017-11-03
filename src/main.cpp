@@ -72,13 +72,6 @@ int main () {
             meas_package.timestamp_ = timestamp;
     	}
 
-        if (count == 1)
-        {
-    		cout << meas_package.sensor_type_ << "\n";
-    		cout << meas_package.raw_measurements_ << "\n";
-    		cout << meas_package.timestamp_ << "\n";
-        }
-
         VectorXd gt_values(4);
         gt_values(0) = x_gt;
         gt_values(1) = y_gt;
@@ -107,21 +100,10 @@ int main () {
 
         VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
 
-        if (count == 1)
-        {
-			cout << count << "-th:   " << "px: " << p_x << ", py: " << p_y << ", vx: " << v1 << ", vy: " << v2 << "\n";
-			cout << "=====================================================================================" << "\n";
-        }
-
+        cout << count << "	RMSE:    "<< RMSE(0) << ", " << RMSE(1) << ", " << RMSE(2) << ", " << RMSE(3) << "\n";
 //        498	RMSE:    0.0973178, 0.0854597, 0.451267, 0.439935
 //        499	RMSE:    0.0972256, 0.0853761, 0.450855, 0.439588
         count++;
-
-
-        if (count == 2)
-            return 0;
-
-
     }
     myfile.close();
   }
