@@ -59,7 +59,7 @@ class FusionEKF(object):
                 px, py = measurement_pack.raw_measurements_[0:2, 0]
                 self.ekf_.x_ = np.array([px, py, 0, 0]).reshape(-1,1)
                 
-            previous_timestamp_ = measurement_pack.timestamp_
+            self.previous_timestamp_ = measurement_pack.timestamp_
             # done initializing, no need to predict or update
             self.is_initialized_ = True
             return None
@@ -69,8 +69,8 @@ class FusionEKF(object):
         #  Prediction
         # *****************************************************************************
         # Time is measured in seconds.
-        dt = (measurement_pack.timestamp_ - previous_timestamp_) / 1000000.0
-        previous_timestamp_ = measurement_pack.timestamp_;
+        dt = (measurement_pack.timestamp_ - self.previous_timestamp_) / 1000000.0
+        self.previous_timestamp_ = measurement_pack.timestamp_;
 
         dt_2 = dt**2
         dt_3 = dt**3
@@ -81,10 +81,10 @@ class FusionEKF(object):
         self.ekf_.F_[1, 3] = dt
 
         # set the process covariance matrix Q
-        self.ekf_.Q_ = np.array([[dt_4/4*noise_ax,   0,                dt_3/2*noise_ax,  0],
-                                 [0,                 dt_4/4*noise_ay,  0,                dt_3/2*noise_ay],
-                                 [dt_3/2*noise_ax,   0,                dt_2*noise_ax,    0],
-                                 [0,                 dt_3/2*noise_ay,  0,                dt_2*noise_ay]])
+        self.ekf_.Q_ = np.array([[dt_4/4*self.noise_ax,   0,                dt_3/2*self.noise_ax,  0],
+                                 [0,                 dt_4/4*self.noise_ay,  0,                dt_3/2*self.noise_ay],
+                                 [dt_3/2*self.noise_ax,   0,                dt_2*self.noise_ax,    0],
+                                 [0,                 dt_3/2*self.noise_ay,  0,                dt_2*self.noise_ay]])
 
         self.ekf_.Predict()
 

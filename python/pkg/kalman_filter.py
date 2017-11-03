@@ -17,8 +17,8 @@ class KalmanFilter(object):
     def Predict(self):
         # predict the state
         self.x_ = np.dot(self.F_, self.x_)
-        Ft = self.F.T
-        self.P_ = np.dot(np.dot(self.F_, self.P_), Ft) + self.Q
+        Ft = self.F_.T
+        self.P_ = np.dot(np.dot(self.F_, self.P_), Ft) + self.Q_
         
     def Update(self, z):
         # update the state by using Kalman Filter equations
