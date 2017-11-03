@@ -4,8 +4,6 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
-const float PI2 = 2 * M_PI;
-
 KalmanFilter::KalmanFilter() {}
 
 KalmanFilter::~KalmanFilter() {}
@@ -68,6 +66,23 @@ VectorXd RadarCartesianToPolar(const VectorXd &x_state){
 	return z_pred;
 }
 
+
+VectorXd InnovateRadarMeas(const VectorXd &z, const VectorXd &z_pred)
+{
+	  VectorXd y = z - z_pred;
+
+	  // normalize the angle between -pi to pi
+	  while(y(1) > M_PI){
+	    y(1) -= M_PI*2;
+	  }
+
+	  while(y(1) < -M_PI){
+	    y(1) += M_PI*2;
+	  }
+	  return y;
+}
+
+
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
   /**
     * update the state by using Extended Kalman Filter equations
@@ -75,16 +90,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 
   // convert radar measurements from cartesian coordinates (x, y, vx, vy) to polar (rho, phi, rho_dot).
   VectorXd z_pred = RadarCartesianToPolar(x_);
-  VectorXd y = z - z_pred;
-
-  // normalize the angle between -pi to pi
-  while(y(1) > M_PI){
-    y(1) -= PI2;
-  }
-
-  while(y(1) < -M_PI){
-    y(1) += PI2;
-  }
+  VectorXd y = InnovateRadarMeas(z, z_pred);
 
   // following is exact the same as in the function of KalmanFilter::Update()
   MatrixXd Ht = H_.transpose();
