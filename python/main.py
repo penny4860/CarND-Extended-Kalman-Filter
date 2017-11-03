@@ -34,7 +34,6 @@ for line in lines:
         y_gt = float(y_gt)
         vx_gt = float(vx_gt)
         vy_gt = float(vy_gt)
-#         print(ro, theta, ro_dot)
         
         meas_package.sensor_type_ = "R";
         meas_package.raw_measurements_ = np.array([ro, theta, ro_dot]).reshape(-1,1)
@@ -51,11 +50,14 @@ for line in lines:
         y_gt = float(y_gt)
         vx_gt = float(vx_gt)
         vy_gt = float(vy_gt)
-#         print(px, py)
         
         meas_package.sensor_type_ = "L";
         meas_package.raw_measurements_ = np.array([px, py]).reshape(-1,1)
         meas_package.timestamp_ = timestamp;
+    
+    print("sensor", meas_package.sensor_type_)
+    print("measurement", meas_package.raw_measurements_)
+    print("timestamp", meas_package.timestamp_)
     
     
     gt_values = np.array([x_gt, y_gt, vx_gt, vy_gt])
@@ -72,10 +74,14 @@ for line in lines:
     estimations.append(estimate)
     
     RMSE = tools_.CalculateRMSE(estimations, ground_truth)
-    print("{} RMSE: {}, {}, {}, {}".format(count, RMSE[0], RMSE[1], RMSE[2], RMSE[3]))
-    print("    {}, {}, {}, {}".format(px, py, vx, vy))
+    #print("{} RMSE: {}, {}, {}, {}".format(count, RMSE[0], RMSE[1], RMSE[2], RMSE[3]))
+    print("{}-th:     px: {}, py: {}, vx: {}, vy: {}".format(count, px, py, vx, vy))
+    print("=====================================================================================")
     
     count += 1
+    
+    if count == 2:
+        break
     
     
 #     cout << count << "    RMSE:    "<< RMSE(0) << ", " << RMSE(1) << ", " << RMSE(2) << ", " << RMSE(3) << "\n";
