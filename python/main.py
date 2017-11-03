@@ -73,7 +73,7 @@ for line in lines:
     
     count += 1
     
-    if count == 3:
+    if count == 2:
         break
     
     
