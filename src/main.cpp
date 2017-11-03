@@ -118,7 +118,7 @@ int main () {
         count++;
 
 
-        if (count == 2)
+        if (count == 3)
             return 0;
 
 
