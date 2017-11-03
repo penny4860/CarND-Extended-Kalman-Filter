@@ -23,8 +23,16 @@ for line in lines:
     meas_package = MeasurementPackage()
     if sensor == "R":
         ro, theta, ro_dot, timestamp = line[1:5]
+        ro = float(ro)
+        theta = float(theta)
+        ro_dot = float(ro_dot)
+        timestamp = float(timestamp)
+
         x_gt, y_gt, vx_gt, vy_gt = line[5:9]
-        
+        x_gt = float(x_gt)
+        y_gt = float(y_gt)
+        vx_gt = float(vx_gt)
+        vy_gt = float(vy_gt)
         print(ro, theta, ro_dot)
         
         meas_package.sensor_type_ = "R";
@@ -33,13 +41,23 @@ for line in lines:
 
     else:
         px, py, timestamp = line[1:4]
+        px = float(px)
+        py = float(py)
+        timestamp = float(timestamp)
+        
         x_gt, y_gt, vx_gt, vy_gt = line[4:8]
-
+        x_gt = float(x_gt)
+        y_gt = float(y_gt)
+        vx_gt = float(vx_gt)
+        vy_gt = float(vy_gt)
         print(px, py)
         
         meas_package.sensor_type_ = "L";
         meas_package.raw_measurements_ = np.array([px, py]).reshape(-1,1)
         meas_package.timestamp_ = timestamp;
+    
+    
+    print("raw array", meas_package.raw_measurements_)
     
     gt_values = np.array([x_gt, y_gt, vx_gt, vy_gt])
     ground_truth.append(gt_values)
@@ -50,7 +68,6 @@ for line in lines:
 # 
     # Push the current estimated x,y positon from the Kalman filter's state vector
     px, py, vx, vy = fusionEKF.ekf_.x_[0,0], fusionEKF.ekf_.x_[1,0], fusionEKF.ekf_.x_[2,0], fusionEKF.ekf_.x_[3,0]
-    print(px, py, vx, vy)
     
     estimate = np.array([px, py, vx, vy])
     estimations.append(estimate)
