@@ -55,11 +55,6 @@ for line in lines:
         meas_package.raw_measurements_ = np.array([px, py]).reshape(-1,1)
         meas_package.timestamp_ = timestamp;
     
-    print("sensor", meas_package.sensor_type_)
-    print("measurement", meas_package.raw_measurements_)
-    print("timestamp", meas_package.timestamp_)
-    
-    
     gt_values = np.array([x_gt, y_gt, vx_gt, vy_gt])
     ground_truth.append(gt_values)
     
@@ -74,22 +69,6 @@ for line in lines:
     estimations.append(estimate)
     
     RMSE = tools_.CalculateRMSE(estimations, ground_truth)
-    #print("{} RMSE: {}, {}, {}, {}".format(count, RMSE[0], RMSE[1], RMSE[2], RMSE[3]))
-    print("{}-th:     px: {}, py: {}, vx: {}, vy: {}".format(count, px, py, vx, vy))
-    print("=====================================================================================")
-    
+    print("{} RMSE: {}, {}, {}, {}".format(count, RMSE[0], RMSE[1], RMSE[2], RMSE[3]))
     count += 1
-    
-    if count == 2:
-        break
-    
-    
-#     cout << count << "    RMSE:    "<< RMSE(0) << ", " << RMSE(1) << ", " << RMSE(2) << ", " << RMSE(3) << "\n";
-#     # //        498    RMSE:    0.0973178, 0.0854597, 0.451267, 0.439935
-#     # //        499    RMSE:    0.0972256, 0.0853761, 0.450855, 0.439588
-#     count++;
-
-    
-    
-# print(ground_truth)
     
