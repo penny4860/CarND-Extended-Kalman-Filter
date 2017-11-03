@@ -69,5 +69,5 @@ for line in lines:
 
     
     
-print(ground_truth)
+# print(ground_truth)
     
