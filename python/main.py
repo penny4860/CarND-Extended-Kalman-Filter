@@ -6,7 +6,7 @@ from pkg.tools import Tools
 import numpy as np
 
 
-def main():
+def main(print_rmse=True):
     filename = "..//data//obj_pose-laser-radar-synthetic-input.txt"
     f = open(filename, 'r')
     lines = f.readlines()
@@ -76,7 +76,8 @@ def main():
         estimations.append(estimate)
         
         RMSE = tools_.CalculateRMSE(estimations, ground_truth)
-        print("{} RMSE: {}, {}, {}, {}".format(count, RMSE[0], RMSE[1], RMSE[2], RMSE[3]))
+        if print_rmse:
+            print("{} RMSE: {}, {}, {}, {}".format(count, RMSE[0], RMSE[1], RMSE[2], RMSE[3]))
         count += 1
 
     return measurments, estimations, ground_truth
@@ -88,7 +89,7 @@ def _polar_to_xy(rho, theta):
     return x, y
 
 if __name__ == "__main__":
-    zs, xs, gts = main()
+    zs, xs, gts = main(print_rmse=False)
     zs = np.array(zs)
     xs = np.array(xs)
     gts = np.array(gts)
