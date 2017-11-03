@@ -54,10 +54,10 @@ class FusionEKF(object):
             # Convert radar from polar to cartesian coordinates and initialize state.
             if measurement_pack.sensor_type_ == "R":
                 ro, phi, ro_dot = measurement_pack.raw_measurements_[0:3]
-                self.ekf_.x_ = np.array([rho * cos(phi), rho * sin(phi), 0, 0]).reshape(-1,1)
+                self.ekf_.x_ = np.array([ro * np.cos(phi), ro * np.sin(phi), 0, 0]).reshape(-1,1)
             elif measurement_pack.sensor_type_ == "L":
                 px, py = measurement_pack.raw_measurements_[0:2]
-                self.ekf_.x_ = np.array([px, py]).reshape(-1,1)
+                self.ekf_.x_ = np.array([px, py, 0, 0]).reshape(-1,1)
                 
             previous_timestamp_ = measurement_pack.timestamp_
             # done initializing, no need to predict or update

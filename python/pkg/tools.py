@@ -10,7 +10,7 @@ class Tools(object):
         # Calculate the RMSE here.
         rmse = np.zeros((4,))
         
-        if estimations.shape != ground_truth.shape:
+        if np.array(estimations).shape != np.array(ground_truth).shape:
             raise ValueError("Invalid estimation or ground_truth data")
     
         # accumulate squared residuals
