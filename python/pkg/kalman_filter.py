@@ -33,7 +33,7 @@ class KalmanFilter(object):
         # new estimate
         self.x_ = self.x_ + np.dot(K, y)
         I = np.identity(len(self.x_))
-        self.P_ = (I - np.dot(K, self.H_)) * self.P_
+        self.P_ = np.dot((I - np.dot(K, self.H_)), self.P_)
 
     
     def UpdateEKF(self, z):
@@ -60,8 +60,7 @@ class KalmanFilter(object):
         # new estimate
         self.x_ = self.x_ + np.dot(K, y)
         I = np.identity(len(self.x_))
-        self.P_ = (I - np.dot(K, self.H_)) * self.P_
-
+        self.P_ = np.dot((I - np.dot(K, self.H_)), self.P_)
 
 
 def RadarCartesianToPolar(x_state):
