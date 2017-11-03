@@ -5,13 +5,15 @@ from pkg.tools import Tools
 
 import numpy as np
 
-if __name__ == "__main__":
+
+def main():
     filename = "..//data//obj_pose-laser-radar-synthetic-input.txt"
     f = open(filename, 'r')
     lines = f.readlines()
     
     estimations = []
     ground_truth = []
+    measurments = []
     
     # Create a Kalman Filter instance
     fusionEKF = FusionEKF()
@@ -39,6 +41,9 @@ if __name__ == "__main__":
             meas_package.sensor_type_ = "R";
             meas_package.raw_measurements_ = np.array([ro, theta, ro_dot]).reshape(-1,1)
             meas_package.timestamp_ = timestamp;
+            
+            px, py = _polar_to_xy(ro, theta)
+            measurments.append((px, py))
     
         else:
             px, py, timestamp = line[1:4]
@@ -55,6 +60,8 @@ if __name__ == "__main__":
             meas_package.sensor_type_ = "L";
             meas_package.raw_measurements_ = np.array([px, py]).reshape(-1,1)
             meas_package.timestamp_ = timestamp;
+
+            measurments.append((px, py))
         
         gt_values = np.array([x_gt, y_gt, vx_gt, vy_gt])
         ground_truth.append(gt_values)
@@ -71,4 +78,36 @@ if __name__ == "__main__":
         RMSE = tools_.CalculateRMSE(estimations, ground_truth)
         print("{} RMSE: {}, {}, {}, {}".format(count, RMSE[0], RMSE[1], RMSE[2], RMSE[3]))
         count += 1
+
+    return measurments, estimations, ground_truth
+
+
+def _polar_to_xy(rho, theta):
+    x = rho * np.cos(theta)
+    y = rho * np.sin(theta)
+    return x, y
+
+if __name__ == "__main__":
+    zs, xs, gts = main()
+    zs = np.array(zs)
+    xs = np.array(xs)
+    gts = np.array(gts)
+
+    import matplotlib.pyplot as plt
+    plt.scatter(zs[:, 0], zs[:, 1], facecolors='none', edgecolors='gray', label='measurements')
+    plt.scatter(gts[:, 0], gts[:, 1], facecolors='none', edgecolors='red', label='Ground Truth')
+    plt.plot(xs[:, 0], xs[:, 1], "b--", label='Extended Kalman Filtered')
+    plt.legend()
+    plt.show()
+
+
+
     
+    
+    
+    
+    
+
+
+
+
