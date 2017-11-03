@@ -1,5 +1,7 @@
 
-from tools import Tools
+from pkg.tools import Tools
+from pkg.kalman_filter import KalmanFilter
+
 import numpy as np
 
 class FusionEKF(object):
@@ -59,7 +61,7 @@ class FusionEKF(object):
                 
             previous_timestamp_ = measurement_pack.timestamp_
             # done initializing, no need to predict or update
-            self.is_initialized_ = true
+            self.is_initialized_ = True
             return None
         
         
