@@ -36,10 +36,10 @@ class FusionEKF(object):
                                  [0, 0, 1000, 0,],
                                  [0, 0, 0, 1000,]])
 
-        self.ekf_.F_ = np.array([[1, 0, 0, 0,],
-                                 [0, 1, 0, 0,],
+        self.ekf_.F_ = np.array([[1, 0, 1, 0,],
+                                 [0, 1, 0, 1,],
                                  [0, 0, 1, 0,],
-                                 [0, 0, 0, 1,]])
+                                 [0, 0, 0, 1,]], dtype=float)
 
         # set measurement noises
         # Use noise_ax = 9 and noise_ay = 9 for your Q matrix.
