@@ -49,12 +49,13 @@ for line in lines:
     fusionEKF.ProcessMeasurement(meas_package);
 # 
     # Push the current estimated x,y positon from the Kalman filter's state vector
-    print(fusionEKF.ekf_.x_)
-    px, py, vx, vy = fusionEKF.ekf_.x_
-    estimate = np.array([px, py, vx, vy]).reshape(-1,1)
+    px, py, vx, vy = fusionEKF.ekf_.x_[0,0], fusionEKF.ekf_.x_[1,0], fusionEKF.ekf_.x_[2,0], fusionEKF.ekf_.x_[3,0]
+    print(px, py, vx, vy)
+    
+    estimate = np.array([px, py, vx, vy])
     estimations.append(estimate)
     
-    RMSE = tools.CalculateRMSE(estimations, ground_truth)
+    RMSE = tools_.CalculateRMSE(estimations, ground_truth)
     print("RMSE = {}".format(RMSE))
     
 #     cout << count << "    RMSE:    "<< RMSE(0) << ", " << RMSE(1) << ", " << RMSE(2) << ", " << RMSE(3) << "\n";
