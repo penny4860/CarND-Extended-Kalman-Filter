@@ -99,7 +99,7 @@ class FusionEKF(object):
             # Radar updates
             tools_ = Tools()
             
-            H_jacobian = tools_.CalculateJacobian(ekf_.x_)
+            H_jacobian = tools_.CalculateJacobian(self.ekf_.x_)
             self.ekf_.H_ = H_jacobian
             self.ekf_.R_ = self.R_radar_
             self.ekf_.UpdateEKF(measurement_pack.raw_measurements_)

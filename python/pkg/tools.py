@@ -8,13 +8,14 @@ class Tools(object):
     
     def CalculateRMSE(self, estimations, ground_truth):
         # Calculate the RMSE here.
-        rmse = np.zeros((4,))
-        
         if np.array(estimations).shape != np.array(ground_truth).shape:
             raise ValueError("Invalid estimation or ground_truth data")
     
         # accumulate squared residuals
-        residuals = (estimations - ground_truth) ** 2
+        ests = np.array(estimations)
+        gts = np.array(ground_truth)
+
+        residuals = (ests - gts) ** 2
         rmse = np.mean(residuals, axis=0)
         rmse = np.sqrt(rmse)
 
@@ -29,7 +30,7 @@ class Tools(object):
         
         # pre-compute a set of terms to avoid repeated calculation
         c1 = px*px+py*py;
-        c2 = sqrt(c1);
+        c2 = np.sqrt(c1);
         c3 = (c1*c2);
 
         # check division by zero
