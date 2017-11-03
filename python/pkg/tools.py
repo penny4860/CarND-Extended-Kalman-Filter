@@ -40,7 +40,5 @@ class Tools(object):
         # compute the Jacobian matrix
         Hj[0,:] = [(px/c2), (py/c2), 0, 0]
         Hj[1,:] = [-(py/c1), (px/c1), 0, 0]
-        Hj[2,:] = [py*(vx*py - vy*px)/c3,  px*(px*vy - py*vx)/c3, 0, 0]
+        Hj[2,:] = [py*(vx*py - vy*px)/c3,  px*(px*vy - py*vx)/c3, px/c2, py/c2]
         return Hj;
-            
-
