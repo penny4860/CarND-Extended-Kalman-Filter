@@ -15,6 +15,7 @@ ground_truth = []
 # Create a Kalman Filter instance
 fusionEKF = FusionEKF()
 tools_ = Tools()
+count = 0
 
 for line in lines:
     line = str(line).split()
@@ -71,7 +72,11 @@ for line in lines:
     estimations.append(estimate)
     
     RMSE = tools_.CalculateRMSE(estimations, ground_truth)
-    print("RMSE = {}".format(RMSE))
+    print("{} RMSE: {}, {}, {}, {}".format(count, RMSE[0], RMSE[1], RMSE[2], RMSE[3]))
+    print("    {}, {}, {}, {}".format(px, py, vx, vy))
+    
+    count += 1
+    
     
 #     cout << count << "    RMSE:    "<< RMSE(0) << ", " << RMSE(1) << ", " << RMSE(2) << ", " << RMSE(3) << "\n";
 #     # //        498    RMSE:    0.0973178, 0.0854597, 0.451267, 0.439935
