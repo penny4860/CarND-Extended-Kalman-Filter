@@ -83,8 +83,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     	//
       float rho = measurement_pack.raw_measurements_[0];      // range: radial distance from origin
       float phi = measurement_pack.raw_measurements_[1];      // bearing: angle between rho and x axis
-      float rho_dot = measurement_pack.raw_measurements_[2];  // radial velocity: change of rho
-
       px = rho * cos(phi);
       py = rho * sin(phi);
 
