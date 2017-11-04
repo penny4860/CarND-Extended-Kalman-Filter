@@ -7,7 +7,7 @@ In this project I implemented extended kalman filter to estimate the state of a 
 
 Python is the best language for validating mathematical formula implementations and algorithms. I like to verify algorithm flow with python before implementing algorithms in C/C++.
 
-This project also implemented the extended kalman filter in the `` `python`` directory. If you run `` `python / main.py``, you can see the following figure.
+This project also implemented the extended kalman filter in the [python directory](https://github.com/penny4860/CarND-Extended-Kalman-Filter/tree/master/python). If you run [main.py](https://github.com/penny4860/CarND-Extended-Kalman-Filter/blob/master/python/main.py), you can see the following figure.
 
 <img src="images/python.png">
 
@@ -19,13 +19,13 @@ For this reason, it is not suitable for debugging purposes. So I created a versi
 
 #### 1) Simulator Version
 
-This version is in ```simulator-stable``` branch. Please refer to [udacity original repo](https://github.com/udacity/CarND-Extended-Kalman-Filter-Project) for instructions on how to build and run it.
+This version is in [simulator-stable branch](https://github.com/penny4860/CarND-Extended-Kalman-Filter/tree/simulator-stable). Please refer to [udacity original repo](https://github.com/udacity/CarND-Extended-Kalman-Filter-Project) for instructions on how to build and run it.
 
 <img src="images/simulator.png">
 
 #### 2) Debug Version
 
-This version is in ```master``` branch. The only way to do this is to run the make command from the project root. gcc/g++ compiler is required, and there is no other reference library.
+This version is in [master branch](https://github.com/penny4860/CarND-Extended-Kalman-Filter/tree/master). The only way to do this is to run the make command from the project root. gcc/g++ compiler is required, and there is no other reference library.
 
 * gcc/g++ >= 5.4
   * Linux: gcc / g++ is installed by default on most Linux distros
